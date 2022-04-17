@@ -1,0 +1,64 @@
+{
+    "success": true,
+    "data": {
+        "published_work": {
+            "isbn": "9780689833984",
+            "english_language_learner": false,
+            "copyright": null,
+            "published_work_id": 18624,
+            "page_count": 192,
+            "binding": "PB",
+            "cover_art_url": "https://s3.amazonaws.com/mm-static-media/books/cover-art/9780689833984.jpeg"
+        },
+        "work": {
+            "canonical_isbn": "9780689833984",
+            "subcategories": [
+                "Theatre & Plays",
+                "Mixed Media",
+                "Games & Indoor Activities",
+                "Digital"
+            ],
+            "measurements": {
+                "english": {
+                    "lexile": 920,
+                    "lexile_code": "",
+                    "measurable": true,
+                    "msl": 13.2035452323,
+                    "mlf": 3.5194661475,
+                    "structure_demand_percentile": null,
+                    "semantic_demand_percentile": null,
+                    "decoding_demand_percentile": null,
+                    "syntactic_demand_percentile": null
+                }
+            },
+            "max_age": null,
+            "canonical_published_work_id": 18624,
+            "title": "Jim Henson",
+            "subject_tags": [
+                "Hobbies, quizzes & games (Children's / Teenage)",
+                "Television & film (Children's / Teenage)",
+                "People & places (Children's / Teenage)",
+                "Drama & performing (Children's / Teenage)"
+            ],
+            "has_vocab": true,
+            "chapter_measurements": [],
+            "series_name": "Childhood of Famous Americans",
+            "min_age": null,
+            "awards": [],
+            "authors": [
+                "Bob Henderson",
+                "Leslie Gourse"
+            ],
+            "categories": [
+                "Hobbies, Sports & Outdoors",
+                "Art, Creativity & Music",
+                "Fiction, Non-fiction & Poetry"
+            ],
+            "language": "english",
+            "summary": "Jim Henson was always fascinated with puppets. From his happy childhood in the South to days of dazzling international success with the Muppets, here is a true-life story as magical as Henson's endearing puppet creations.",
+            "work_id": 90972,
+            "additional_isbns": [],
+            "recommended_books": []
+        }
+    }
+}

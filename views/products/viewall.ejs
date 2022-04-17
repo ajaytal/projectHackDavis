@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>checkout</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+        integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+        crossorigin="anonymous" />
+    <!-- <link rel = "stylesheet" href = "style.css" type="text/css"> -->
+
+
+    <style>
+        /* put style here */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --tenne-tawny: #589f48;
+            --tenne-tawny-dark: #3b7f2c;
+        }
+
+        body {
+            font-weight: 300;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            font-family: 'Poppins', sans-serif;
+            color: var(--tenne-tawny);
+        }
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: #fff;
+            text-align: center;
+        }
+
+        .title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .home-page {
+            text-decoration: none;
+            color: #fff;
+            background: var(--tenne-tawny);
+            font-weight: 500;
+            font-size: 1.1rem;
+            padding: 0.75rem 0;
+            display: block;
+            width: 175px;
+            margin: 1rem auto;
+            border-radius: 2rem;
+            -webkit-border-radius: 2rem;
+            -moz-border-radius: 2rem;
+            -ms-border-radius: 2rem;
+            -o-border-radius: 2rem;
+            transition: all 0.4s linear;
+            -webkit-transition: all 0.4s linear;
+            -moz-transition: all 0.4s linear;
+            -ms-transition: all 0.4s linear;
+            -o-transition: all 0.4s linear;
+        }
+        .home-page {
+            width: 200px;
+            height: 55px;
+            font-size: 1.8rem;
+            background: var(--tenne-tawny);
+            color: #fff;
+            border: none;
+            border-top-right-radius: 2rem;
+            border-bottom-right-radius: 2rem;
+            border-top-left-radius: 2rem;
+            border-bottom-left-radius: 2rem;
+            transition: all 0.4s linear;
+            -webkit-transition: all 0.4s linear;
+            -moz-transition: all 0.4s linear;
+            -ms-transition: all 0.4s linear;
+            -o-transition: all 0.4s linear;
+        }
+
+
+        .home-page:hover{
+            background: var(--tenne-tawny-dark);
+        }
+
+        .single-item{
+            background-color: var(--tenne-tawny-dark);
+            margin: 1px;
+            color: #fff;
+        }
+
+
+        @media screen and (min-width: 600px) {
+            .book-search-box {
+                width: 540px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        @media screen and (min-width: 768px) {
+            #book {
+                width: 540px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .book-item {
+                margin: 0;
+            }
+
+            .book-details {
+                width: 700px;
+            }
+        }
+
+        @media screen and (min-width: 992px) {
+            #book {
+                width: 540px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div class = "container"
+    style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+        <h2 class = Title >Books Master Database</h2>
+
+    
+    
+        <div >
+            <% for(let book of books){ %>
+            <div class = "single-item" ><a href="/books/<%=book._id%> ">QTY: <%= book.copyCount %>, Title: <%= book.bookTitle %></a>, ISBN: <%= book.isbn %>, Author(s): <%= book.bookAuthor %>, Grade <%= book.gradeLevel %>, Category: <%= book.category %></div>
+            <% } %>
+        </div>
+
+
+        <form action="/books">
+            <button class="home-page">Home Page</button>
+        </form>
+    </div>
+
+
+</body>
+
+</html>

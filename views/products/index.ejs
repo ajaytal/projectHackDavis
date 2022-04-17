@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, heigth=device-height initial-scale=1.0">
+    <title>books</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+        integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+        crossorigin="anonymous" />
+    <!-- <link rel = "stylesheet" href = "style.css" type="text/css"> -->
+
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --tenne-tawny: #003c00;
+            --tenne-tawny-dark: #3b7f2c;
+        }
+
+        body {
+            
+            display: flex;
+            justify-content: center;
+            height: 100%;
+            font-weight: 300;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            font-family: 'Poppins', sans-serif;
+            /*background-image: url('https://i.pinimg.com/originals/56/dd/29/56dd294ebb297058ca1e3c05a4dc06c3.jpg'); */
+            
+            background-color: #F6F6F6;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;  
+        }
+
+        /*  */
+        .btn {
+            font-family: inherit;
+            cursor: pointer;
+            outline: 0;
+            font-size: 1.05rem;
+        }
+
+        .text {
+            opacity: 0.8;
+        }
+
+        .title {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            color: white;
+            text-decoration-line: RED;
+            /*text-shadow: -3px 0 #003c00, 0 3px #003c00, 3px 0 #003c00, 0 -3px */
+            -webkit-text-stroke: 2.5px #003c00;
+        }
+
+        /*  */
+        .container {
+            
+            min-height: 100vh;
+            background-image: url("back.jpg");
+            align-items: center;
+        }
+
+        .book-wrapper {
+            position: relative;
+            height: 100%;
+            padding-top: 100px;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2rem;
+            
+            text-align: center;
+        }
+
+        .book-search {
+            margin: 2rem 0;
+        }
+
+        .book-search cite {
+            font-size: 1rem;
+        }
+
+        .book-search-box {
+            margin: 1.2rem 0;
+            display: flex;
+            align-items: stretch;
+        }
+
+        .search-control,
+        .search-btn {
+            width: 100%;
+        }
+
+        .search-control {
+            padding: 0 1rem;
+            font-size: 1.1rem;
+            font-family: inherit;
+            outline: 0;
+            border: 1px solid var(--tenne-tawny);
+            color: var(--tenne-tawny);
+            border-top-left-radius: 2rem;
+            border-bottom-left-radius: 2rem;
+        }
+
+        .search-control::placeholder {
+            color: var(--tenne-tawny);
+        }
+
+        .search-btn {
+            width: 55px;
+            height: 55px;
+            font-size: 1.8rem;
+            background: var(--tenne-tawny);
+            color: #fff;
+            border: none;
+            margin-right: 1px;
+            transition: all 0.4s linear;
+            -webkit-transition: all 0.4s linear;
+            -moz-transition: all 0.4s linear;
+            -ms-transition: all 0.4s linear;
+            -o-transition: all 0.4s linear;
+        }
+
+        .search-camera-btn {
+            width: 55px;
+            height: 55px;
+            font-size: 1.8rem;
+            background: var(--tenne-tawny);
+            color: #fff;
+            border: none;
+            border-top-right-radius: 2rem;
+            border-bottom-right-radius: 2rem;
+            transition: all 0.4s linear;
+            -webkit-transition: all 0.4s linear;
+            -moz-transition: all 0.4s linear;
+            -ms-transition: all 0.4s linear;
+            -o-transition: all 0.4s linear;
+        }
+
+
+        .search-camera-btn:hover,
+        .search-btn:hover {
+            background: var(--tenne-tawny-dark);
+        }
+
+        .book-result {
+            margin-top: 4rem;
+            /*display: none;*/
+        }
+
+        #book {
+            margin: 2.4rem 0;
+        }
+
+        .book-item {
+            border-radius: 1rem;
+            -webkit-border-radius: 1rem;
+            -moz-border-radius: 1rem;
+            -ms-border-radius: 1rem;
+            -o-border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 4px 21px -12px rgba(0, 0, 0, 0.79);
+            margin: 2rem 0;
+        }
+
+        .book-img img {
+            width: 100%;
+            display: block;
+        }
+
+        .book-name {
+            padding: 1.5rem 0.5rem;
+        }
+
+        .book-name h3 {
+            font-size: 1.4rem;
+        }
+
+        .recipe-btn {
+            font-family: inherit;
+            text-decoration: none;
+            color: #fff;
+            background: var(--tenne-tawny);
+            font-weight: 500;
+            font-size: 1.1rem;
+            padding: 0.75rem 0;
+            display: block;
+            width: 175px;
+            margin: 1rem auto;
+            border-radius: 2rem;
+            -webkit-border-radius: 2rem;
+            -moz-border-radius: 2rem;
+            -ms-border-radius: 2rem;
+            -o-border-radius: 2rem;
+            transition: all 0.4s linear;
+            -webkit-transition: all 0.4s linear;
+            -moz-transition: all 0.4s linear;
+            -ms-transition: all 0.4s linear;
+            -o-transition: all 0.4s linear;
+        }
+
+        .recipe-btn:hover {
+            background: var(--tenne-tawny-dark);
+        }
+
+
+        .book-details {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            -webkit-transform: translate(-50%, -50%);
+            -moz-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            -o-transform: translate(-50%, -50%);
+            color: #fff;
+            background: var(--tenne-tawny);
+            border-radius: 1rem;
+            -webkit-border-radius: 1rem;
+            -moz-border-radius: 1rem;
+            -ms-border-radius: 1rem;
+            -o-border-radius: 1rem;
+            width: 90%;
+            height: 90%;
+            overflow-y: scroll;
+            display: none;
+            padding: 2rem 0;
+        }
+
+        .book-details::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .book-details::-webkit-scrollbar-thumb {
+            background: #f0f0f0;
+            border-radius: 2rem;
+            -webkit-border-radius: 2rem;
+            -moz-border-radius: 2rem;
+            -ms-border-radius: 2rem;
+            -o-border-radius: 2rem;
+        }
+
+
+        /* js related */
+        .showRecipe {
+            display: block;
+        }
+
+        .book-details-content {
+            margin: 2rem;
+        }
+
+        .book-details-content p:not(.recipe-category) {
+            padding: 1rem 0;
+        }
+
+        .recipe-close-btn {
+            position: absolute;
+            right: 2rem;
+            top: 2rem;
+            font-size: 1.8rem;
+            background: #fff;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            -ms-border-radius: 50%;
+            -o-border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.9;
+        }
+
+        .recipe-title {
+            letter-spacing: 1px;
+            padding-bottom: 1rem;
+        }
+
+        .recipe-category {
+            background: #fff;
+            font-weight: 600;
+            color: var(--tenne-tawny);
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border-radius: 0.3rem;
+            -webkit-border-radius: 0.3rem;
+            -moz-border-radius: 0.3rem;
+            -ms-border-radius: 0.3rem;
+            -o-border-radius: 0.3rem;
+        }
+
+        .recipe-category {
+            background: #fff;
+            font-weight: 600;
+            color: var(--tenne-tawny);
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border-radius: 0.3rem;
+            -webkit-border-radius: 0.3rem;
+            -moz-border-radius: 0.3rem;
+            -ms-border-radius: 0.3rem;
+            -o-border-radius: 0.3rem;
+        }
+
+        .recipe-instruct {
+            padding: 1rem 0;
+        }
+
+        .recipe-book-img img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            -ms-border-radius: 50%;
+            -o-border-radius: 50%;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .recipe-link {
+            margin: 1.4rem 0;
+        }
+
+        .recipe-link a {
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 700;
+            transition: all 0.4s linear;
+            -webkit-transition: all 0.4s linear;
+            -moz-transition: all 0.4s linear;
+            -ms-transition: all 0.4s linear;
+            -o-transition: all 0.4s linear;
+        }
+
+        .recipe-link a:hover {
+            opacity: 0.8;
+        }
+
+
+        /*  */
+        .notFound {
+            grid-template-columns: 1fr !important;
+            color: var(--tenne-tawny);
+            font-size: 1.8rem;
+            font-weight: 600;
+            width: 100%;
+        }
+
+        .background{
+            display: flex;
+            align-items: center;
+            position: absolute;
+            justify-content: center;
+            width: auto;
+            height: 100%;
+            opacity: 60%;
+        }
+
+
+        .cont1{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+
+
+
+        /* Media Queries */
+        @media screen and (min-width: 600px) {
+            .book-search-box {
+                width: 540px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        @media screen and (min-width: 768px) {
+            #book {
+                width: 540px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .book-item {
+                margin: 0;
+            }
+
+            .book-details {
+                width: 700px;
+            }
+        }
+
+        @media screen and (min-width: 992px) {
+            #book {
+                width: 540px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+    </style>
+
+
+</head>
+
+<body>
+        <img class ="background" src="https://i.pinimg.com/originals/56/dd/29/56dd294ebb297058ca1e3c05a4dc06c3.jpg">
+        <div class="book-wrapper"
+            style="padding-top:  15%">
+            <div class="book-search">
+                <h2 class="title">Children's Library</h2>
+
+
+                <form action="/books/isbnSearch" method="post">
+
+                    <div class="book-search-box" id="searchBar">
+                        <input type="number" name="isbn" class="search-control " placeholder="Enter an ISBN"
+                            id="search-input">
+
+
+                        <button type="submit" class="search-camera-btn btn " id="search-btn">
+                            <i class="fas fa-search"></i>
+                        </button>
+
+                    </div>
+
+                </form>
+                <% if(failed) { %>
+                    <p>ISBN doesn't exist</p>
+                    <% } %> 
+                <div class = "cont1">
+                    
+                        <form action="/books/new">
+                            <div class="book-name" >
+                                <button type="submit href = "#" class = "recipe-btn" >Add book via ISBN</button>
+                            </div>
+                        </form>
+                    
+
+                    
+                        <form action="/books/viewall"
+                            style="padding-left: 25%;">
+                            <div class="book-name" >
+                                <button type="submit href = "#" class = "recipe-btn" >View all books</button>
+                            </div>
+                        </form>
+                    
+                </div>
+
+
+
+
+
+            </div>
+
+
+
+            <!-- <div class="book-result">
+                <h2 class="title">Your Search Results:</h2>
+                <div id="book">
+
+                </div>
+            </div> -->
+
+
+           
+        </div>
+    
+
+</body>
+
+</html>
