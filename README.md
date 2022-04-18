@@ -4,7 +4,7 @@
 
 Stack: HTML/CSS, JavaScript, Node.js, Express.js, MongoDB & Mongoose, Twilio API, and Fetch API.
 
-Goal: To create a database where librarians can add/view books via simply the ISBN number. Children can view/checkout books via simply the ISBN number.
+Goal: To create a web application where librarians can add/view books via simply the ISBN number. Children can view/checkout books via simply the ISBN number. Shows the book's image, reading level, lexile, category, quantity available, condition, etc.
 
 
 _How to run_:
