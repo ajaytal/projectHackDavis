@@ -8,41 +8,7 @@ async function main() {
     console.log("Mongo connection open!")
 }
 
-
-// ----------------------------------------------------------------------------
-
-// const p = new Product({
-//     name: "Grapefruit",
-//     price: 1.99,
-//     category: "fruit"
-// })
-
-// p.save()
-//     .then(p => {
-//         console.log(p)
-//     })
-//     .catch(err => {
-//         console.log(err)
-//     })
-
-// Product.deleteMany({}, () => {console.log("Cleared.")})
-
-
-
-// physicalProcessing:Boolean
-// onCatalog:       Boolean
-// bookTitle:       String
-// bookAuthor:      String
-// oversize:        Boolean
-// condition:       String
-// needReplacement: Boolean
-// copyCount:       Number
-// isbn:            Number
-// gradeLevel:      Number
-// category:   Stri
-
-
-
+// Seed data set. Run this if you want to have at least some entries in the dataset. Optional.
 const seedBooks = [
     {  
         physicalProcessing: false,
