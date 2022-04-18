@@ -2,7 +2,7 @@
 
 **HackDavis Project**: "Children's Library", date: 04/17/2022 - 04/18/2022, Time: 24 hours
 
-Stack: HTML/CSS, JavaScript, Node.js, Express.js, MongoDB & Mongoose, Twilio API, and Fetch API.
+Stack: HTML(EJS) / CSS, JavaScript, Node.js, Express.js, MongoDB & Mongoose, Twilio API, and Fetch API.
 
 Goal: To create a web application where librarians can add/view books via simply the ISBN number. Children can view/checkout books via simply the ISBN number. Shows the book's image, reading level, lexile, category, quantity available, condition, etc.
 
