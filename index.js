@@ -8,9 +8,7 @@ const twilio = require('twilio');
 
 // ----------------------------------------------------------------------------
 const mongoose = require('mongoose');
-//Product schema
 const Books = require('./models/bookSchema');
-// const Books = require('./models/bookSchema');
 let failed = false
 
 
@@ -60,7 +58,7 @@ app.get('/books/viewall', async (req, res) =>{
 
 
 // Post new product and add it into our database 
-// This is where we do our ISBN Algorithm thing
+// This is where we do our ISBN Algorithm where we fetch data using ISBN and return all the details about the book like category, lexile, grade level, author, picture, etc.
 app.post('/books', async (req, res) => {
     console.log("Called POST /books")
 
@@ -69,13 +67,17 @@ app.post('/books', async (req, res) => {
     const phoneNum = response.phonenumber
     const fullname = response.fullname
     const isbnVal = response.isbnVal
-    console.log("~~~~~~~~~~~~~ we got here ~~~~~~~~~~~~~")
     if (phoneNum > 0) {
         
-        const accountSid = 'AC0ba3d0b6fe1af3ada7e31d142f2e63f1';
-        const authToken = 'c7267b690b9b000211402e56288fea31';
+        // ! IMPORTANT ! ---> If you'd like to implement the twilio function, follow these instructions (for you guys reading this github repo)
+        // set usingTwilioAPI to true
+        // get a number (you can use a trial accnt), and then find the accountSid, authToken, and the twilioNum as required.
+        let usingTwilioAPI = false
+        const accountSid = "yourAccountSidHere"; // our old one (de-activated): "AC0ba3d0b6fe1af3ada7e31d142f2e63f1"
+        const authToken = "yourAuthTokenHere"; // our old one (de-activated): "c7267b690b9b000211402e56288fea31"
+        let twilioNum = "yourNumberHere" // our old one (de-activated), please follow similar format: "+12166161839"
+
         const client = require('twilio')(accountSid, authToken);
-        let twilioNum = "+12166161839"
         console.log(`fullname: ${fullname}, user phonenumber: ${phoneNum}`)
         console.log(`from: twilio, to: ${phoneNum}`)
         console.log(`For book ${isbnVal}`)
@@ -96,6 +98,7 @@ app.post('/books', async (req, res) => {
         let objectID = 1
         let currentCount = 0
         let bookName = ""
+        // yes we know this could've been implemented better using the other methods from mongoose but we didn't realize it existed at the time of the hackathon
         for (book of Books_Found) {
             if (book.isbn == isbnVal) {
                 objectID = book._id.toString()
@@ -111,25 +114,26 @@ app.post('/books', async (req, res) => {
             await Books.findByIdAndDelete(objectID)
             console.log("Count reached 0, removing from database")
         }
-        console.log(`Updated copy count from ${currentCount} to ${currentCount-1}`)
+        
+        
+        // again, if you want to use twilio (yes, you, the reader of this github repo), then put this as true and follow instructions from above
+        if(usingTwilioAPI){
+        
+            console.log(`Updated copy count from ${currentCount} to ${currentCount-1}`)
+            let theMessage = `Hi ${fullname}! Thank you for your checkout for "${bookName}", ISBN: ${isbnVal}. Please come return before ${monthLater}`
 
-        console.log("----TWILIO MESSAGE BELOW----")
-        let theMessage = `Hi ${fullname}! Thank you for your checkout for "${bookName}", ISBN: ${isbnVal}. Please come return before ${monthLater}`
-        console.log("----------------------------")
-        // await client.messages
-        // .create({
-        //    body: theMessage,
-        //    from: twilioNum,
-        //    to: `+1${phoneNum}`
-        //  })
-        // .then(message => console.log(message.sid));
-
+            await client.messages
+            .create({
+               body: theMessage,
+               from: twilioNum,
+               to: `+1${phoneNum}`
+             })
+            .then(message => console.log(message.sid));
+        }
 
         res.redirect('/books')
         return
     }
-
-    // console.log(response)
 
     let isbn = parseInt(response.isbn)
     let copycount = parseInt(response.copycount);
@@ -152,19 +156,6 @@ app.post('/books', async (req, res) => {
     let gradeLevel = lexileToGrade(lexile)
     let category = bookData.data.work.categories;
     let image = bookData.data.published_work.cover_art_url
-
-    // console.log(`! lexile = ${bookData.data.work.measurements.english.lexile}`)
-    // console.log(`! lexile = ${bookData.data.published_work.cover_art_url}`)
-
-    // console.log(lexile)
-
-    // const categories = await categoryParser(isbn)
-    // const url = await urlParser(isbn)
-
-    // console.log(`Lexile: ${lexile}`)
-    // console.log(`categories: ${categories}`)
-    // console.log(`url: ${url}`)
-
 
     const newBook = await new Books({
         "physicalProcessing": physicalProcessing,
@@ -192,18 +183,12 @@ app.post('/books', async (req, res) => {
         }
     }
     console.log(`ID of new added entry: ${objectID}`)
-
-    // console.log(`----- Added ----- \n Book Title: ${response.name}\n Price: ${response.price} \n Tag: ${response.tag} \n-----------------`)
     res.redirect(`/books/${objectID}`)
 })
 
-// Get information about specific product
+// Get information about specific book
 app.post('/books/isbnSearch', async (req, res) => {
-
-    console.log("/books/isbnSearch!!!!")
-
     console.log(`isbn = ${req.body.isbn}`)
-
 
     const Books_Found = await Books.find({})
     let isbn = parseInt(req.body.isbn)
@@ -225,62 +210,25 @@ app.post('/books/isbnSearch', async (req, res) => {
     console.log(`Final objectID = ${objectID}`)
     res.redirect(`/books/${objectID}`)
 
-
-
-    // const productID = req.params.id;
-    // const product = await Books.findById(productID)
-    // console.log("Requesting details for", product.name)
-    // res.render('products/details.ejs', { product })
 })
 
 app.get('/books/:isbn', async (req, res) => {
-    // const bookisbn = req.params.isbn;
-    // const book = await Books.find({}).select({ "isbn": bookisbn });
-    // console.log(book)
-    // // console.log(`Requesting details for , ${book.isbn}`)
-    // res.render('products/details.ejs', { book })
 
     const bookID = req.params.isbn;
     console.log(`Mongo ObjectID: ${bookID}`)
     const book = await Books.findById(bookID)
 
-    // await console.log("Requesting details for", book.bookTitle)
     res.render('products/details.ejs', { book })
 })
-
-// View page that allows you to make edits to a product
-// app.get('/books/:id/edit', async (req, res) => {
-//     const productID = req.params.id
-//     const product = await Books.findById(productID)
-//     res.render('products/edit.ejs', { product })
-// })
-
-// Change product data 
-// app.put('/books/:id', async (req, res) => {
-//     const newProductDetails = req.body
-//     const id = req.params.id
-//     const updatedProduct = await Books.findByIdAndUpdate(id, newProductDetails, { runValidators: true, new: true })
-//     console.log("Updated product")
-//     res.redirect(`/books/${updatedProduct._id}`)
-// })
-
-// Delete product data
-// app.delete('/books/:id', async (req, res) => {
-//     const id = req.params.id
-//     const deletedProduct = await Books.findByIdAndDelete(id)
-//     console.log("Deleted",deletedProduct.name)
-//     res.redirect('/books')
-// })
-
 
 app.use('*', (req, res) => {
     res.redirect('/books')
 })
 
-// ----------------------------------------------------------------------------
+// Running server
 app.listen(3000, () => { console.log("Server is up and running on port 3000!") })
 
-// ----------------------
+// Functions!
 function isbnParser(isbn) {
     let url = `https://atlas-fab.lexile.com/free/books/${isbn}`;
     const options = {
@@ -288,9 +236,7 @@ function isbnParser(isbn) {
             accept: "application/json; version=1.0"
         }
     };
-    console.log("-----In the fetch-----")
-
-
+    console.log("-----Fetching by ISBN...-----")
     return fetch(url, options)
         .then(res => res.json())
         .then(res => {
@@ -301,7 +247,7 @@ function isbnParser(isbn) {
             return res
         })
         .catch(a => {
-            console.log("INVALID ISBN!!!!")
+            console.log("-----FAILED FETCH, POSSIBLE INVALID ISBN-----")
         })
 }
 
