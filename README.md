@@ -13,4 +13,4 @@ _How to run_:
 - Run `seed.js` to seed the database with a few books (completely optional)
 - `node index.js` to run the server
 - Go to http://localhost:3000/books/
-- _Note: to use Twilio API, you need to set up your own trial account. Instructions available on `index.js`._
+- _Note: to use Twilio API, you need to set up your own trial account. Instructions available on `index.js` and setting up account instructions can be found online (takes around ~3-5 minutes to set up, $0.)
