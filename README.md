@@ -6,7 +6,6 @@ Stack: HTML(EJS) / CSS, JavaScript, Node.js, Express.js, MongoDB & Mongoose, Twi
 
 Goal: To create a web application where librarians can add/view books via simply the ISBN number. Children can view/checkout books via simply the ISBN number. Shows the book's image, reading level, lexile, category, quantity available, condition, etc.
 
-
 _How to run_:
 - `npm install` to install all dependencies
 - Run `mongod` and `mongo` on powershell after you have it installed 
