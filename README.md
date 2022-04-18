@@ -10,7 +10,7 @@ Goal: To create a web application where librarians can add/view books via simply
 _How to run_:
 - `npm install` to install all dependencies
 - Run `mongod` and `mongo` on powershell after you have it installed 
-- Run seed.js to seed the database with a few entries
+- Run `seed.js` to seed the database with a few books (completely optional)
 - `node index.js` to run the server
 - Go to http://localhost:3000/books/
-- _Note: to use Twilio API, you need to set up your own trial account. Instructions on `index.js`._
+- _Note: to use Twilio API, you need to set up your own trial account. Instructions available on `index.js`._
