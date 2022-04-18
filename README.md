@@ -4,6 +4,8 @@
 
 Stack: HTML/CSS, JavaScript, Node.js, Express.js, MongoDB & Mongoose, Twilio API, and Fetch API.
 
+Goal: To create a database where librarians can add/view books via simply the ISBN number. Children can view/checkout books via simply the ISBN number.
+
 
 _How to run_:
 - `npm install` to install all dependencies
