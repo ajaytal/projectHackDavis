@@ -6,11 +6,9 @@ const fetch = require('node-fetch')
 
 const twilio = require('twilio');
 
-// ----------------------------------------------------------------------------
 const mongoose = require('mongoose');
 const Books = require('./models/bookSchema');
 let failed = false
-
 
 const { resourceUsage } = require('process');
 const { redirect } = require('express/lib/response')
@@ -20,7 +18,6 @@ async function main() {
     await mongoose.connect('mongodb://localhost:27017/bookSchema');
     console.log("Mongo connection open!")
 }
-// ----------------------------------------------------------------------------
 
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
@@ -28,15 +25,9 @@ app.use(express.urlencoded({ extended: true })) //middleware, needed to get req.
 
 app.use(methodOverride('_method')) //middleware, allows us to use things other than GET and POST from HTML forms
 
-
 // Get page that contains information about all products
-
-
 app.get('/books', async (req, res) => {
-
     const books = await Books.find({})
-    // console.log("Called GET /books")
-
     res.render('products/index.ejs', { books, failed })
 })
 
@@ -52,16 +43,10 @@ app.get('/books/viewall', async (req, res) =>{
     res.render('products/viewall.ejs', { books })
 })
 
-// Get information about specific book
-
-
-
-
 // Post new product and add it into our database 
 // This is where we do our ISBN Algorithm where we fetch data using ISBN and return all the details about the book like category, lexile, grade level, author, picture, etc.
 app.post('/books', async (req, res) => {
     console.log("Called POST /books")
-
 
     const response = req.body
     const phoneNum = response.phonenumber
@@ -91,20 +76,18 @@ app.post('/books', async (req, res) => {
         var date = new Date();
         let monthLater = date.addDays(30)
 
-
         console.log(monthLater);
         const Books_Found = await Books.find({})
 
         let objectID = 1
         let currentCount = 0
         let bookName = ""
-        // yes we know this could've been implemented better using the other methods from mongoose but we didn't realize it existed at the time of the hackathon
+
         for (book of Books_Found) {
             if (book.isbn == isbnVal) {
                 objectID = book._id.toString()
                 currentCount = book.copyCount
-                bookName = book.bookTitle
-                
+                bookName = book.bookTitle        
                 console.log(`Found - ${objectID}, Bookname - ${bookName}`)
             }
         }
@@ -114,7 +97,6 @@ app.post('/books', async (req, res) => {
             await Books.findByIdAndDelete(objectID)
             console.log("Count reached 0, removing from database")
         }
-        
         
         // again, if you want to use twilio (yes, you, the reader of this github repo), then put this as true and follow instructions from above
         if(usingTwilioAPI){
@@ -213,11 +195,9 @@ app.post('/books/isbnSearch', async (req, res) => {
 })
 
 app.get('/books/:isbn', async (req, res) => {
-
     const bookID = req.params.isbn;
     console.log(`Mongo ObjectID: ${bookID}`)
     const book = await Books.findById(bookID)
-
     res.render('products/details.ejs', { book })
 })
 
